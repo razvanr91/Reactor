@@ -1,4 +1,5 @@
 using Application.Activities;
+using Application.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,8 @@ builder.Services.AddCors(options =>
 
 // Tells MediatR where to find the files
 builder.Services.AddMediatR(typeof(List.Handler).Assembly);
+
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 var app = builder.Build();
 
