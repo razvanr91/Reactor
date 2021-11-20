@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import axios from "axios";
 import { Header, List } from "semantic-ui-react";
+import { Activity } from "../models/activity";
 
 function App() {
-	const [activities, setActivities] = useState([]);
+	const [activities, setActivities] = useState<Activity[]>([]);
 
 	useEffect(() => {
-		axios.get("https://localhost:7206/api/activities").then((response) => {
-			console.log(response);
+		axios.get<Activity[]>("https://localhost:7206/api/activities").then((response) => {
 			setActivities(response.data);
 		});
 	}, []);
@@ -17,7 +16,7 @@ function App() {
 		<div>
 			<Header as="h2" icon="users" content="Reactor" />
 			<List>
-				{activities.map((activity: any) => {
+				{activities.map((activity) => {
 					return <List.Item key={activity.id}>{activity.title}</List.Item>;
 				})}
 			</List>

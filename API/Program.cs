@@ -23,18 +23,19 @@ builder.Services.AddDbContext<DataContext>(Options =>
     Options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("CorsPolicy", policy =>
-    {
-        policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000/");
-    });
-});
 
 // Tells MediatR where to find the files
 builder.Services.AddMediatR(typeof(List.Handler).Assembly);
 
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+    });
+});
 
 var app = builder.Build();
 
