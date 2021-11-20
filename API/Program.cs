@@ -1,3 +1,5 @@
+using Application.Activities;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -27,6 +29,9 @@ builder.Services.AddCors(options =>
         policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000/");
     });
 });
+
+// Tells MediatR where to find the files
+builder.Services.AddMediatR(typeof(List.Handler).Assembly);
 
 var app = builder.Build();
 
